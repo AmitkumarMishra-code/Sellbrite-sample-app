@@ -10,16 +10,16 @@ import {
 } from "@chakra-ui/react"
 import { Link as homeLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import { getChannels } from "../apiCalls/apiCalls";
+import { getProducts } from "../apiCalls/apiCalls";
 
-export default function Channel() {
+export default function Inventory() {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
 
     const fetchData = async () => {
         try {
-            let response = await getChannels()
+            let response = await getProducts()
             setIsLoading(false)
             console.log(response)
             setData(response)
@@ -41,29 +41,58 @@ export default function Channel() {
             }
             {
                 data.length > 0 && !isLoading && !errorMessage ?
-                    <Box minW='40%' borderWidth="1px" borderRadius="lg" boxShadow='md' p = '2rem'>
+                    <Box minW='40%' borderWidth="1px" borderRadius="lg" boxShadow='md' p='2rem'>
                         <Table variant="striped" borderWidth="1px" borderRadius='lg'>
-                            <TableCaption>Detailed View of all Channels</TableCaption>
+                            <TableCaption>Detailed View of all Products</TableCaption>
                             <Thead>
                                 <Tr>
-                                    <Th>Display Name</Th>
-                                    <Th>Current State</Th>
-                                    <Th>Region</Th>
+                                    <Th>Product Name</Th>
+                                    <Th>SKU</Th>
+                                    <Th>On Hand</Th>
+                                    <Th>Available</Th>
+                                    <Th>Cost</Th>
+                                    <Th>Bin Location</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {
-                                    data.length > 0 && data.map((channel, idx) =>
+                                    data.length > 0 && data.map((product, idx) =>
                                         <Tr key={idx}>
-                                            <Td>{channel.channel_type_display_name}</Td>
-                                            <Td>{channel.state}</Td>
-                                            <Td> {channel.channel_site_region}</Td>
+                                            <Td>{product.product_name}</Td>
+                                            <Td> {product.sku}</Td>
+                                            <Td>{product.on_hand}</Td>
+                                            <Td>{product.available}</Td>
+                                            <Td> {product.cost}</Td>
+                                            <Td> {product.bin_location}</Td>
                                         </Tr>
                                     )
                                 }
                             </Tbody>
                         </Table>
-                        <Box d='flex'  justifyContent='center' alignItems='center'>
+
+                        {/*
+                        "sku":"SBWATBOT"
+                        "warehouse_uuid":"a6b9904c-33bd-4618-bd0a-39fcb40309e0"
+                        "on_hand":10
+                        "product_name":"Sample Product"
+                        "available":10
+                        "reserved":0
+                        "package_length":12
+                        "package_width":4
+                        "package_height":4
+                        "package_weight":7
+                        "cost":2.99
+                        "bin_location":"A1"
+                        "fnsku":NULL
+                        "upc":"012345-67790"
+                        "ean":NULL
+                        "isbn":NULL
+                        "gtin":NULL
+                        "gcid":NULL
+                        "epid":NULL
+                        "asin":NULL
+                        */}
+                        <Box d='flex' justifyContent='center' alignItems='center'>
                             <Link as={homeLink} to='/' style={{ textDecoration: 'none' }}><Button mt='1rem' colorScheme='whatsapp'>Home</Button></Link>
                         </Box>
                     </Box>

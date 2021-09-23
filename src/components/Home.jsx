@@ -1,5 +1,5 @@
 import { Box, Button, Link, Text } from "@chakra-ui/react";
-import { Link as channelLink, Link as warehouseLink } from 'react-router-dom'
+import { Link as productsLink, Link as inventoryLink } from 'react-router-dom'
 
 export default function Home() {
     return (
@@ -8,8 +8,8 @@ export default function Home() {
                 Dashboard
             </Text>
             <Box d= 'flex' justifyContent='center' alignItems = 'center' >
-                <Link as={channelLink} to='/channels' style = {{textDecoration:'none'}}><Button colorScheme = 'whatsapp' mr = '2rem'>Channels</Button></Link>
-                <Link as={warehouseLink} to='/warehouses' style = {{textDecoration:'none'}}><Button colorScheme ='telegram'>Warehouses</Button></Link>
+                <Link as={productsLink} to='/products' style = {{textDecoration:'none'}}><Button colorScheme = 'whatsapp' mr = '2rem'>Products</Button></Link>
+                <Link as={inventoryLink} to='/inventory' style = {{textDecoration:'none'}}><Button colorScheme ='telegram'>Inventory</Button></Link>
             </Box>
         </Box>
     )

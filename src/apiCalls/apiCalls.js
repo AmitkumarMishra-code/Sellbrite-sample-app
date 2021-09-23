@@ -3,10 +3,9 @@ const URL = `https://api.sellbrite.com/v1`
 const authToken = Buffer.from(process.env.REACT_APP_ACCOUNT_TOKEN +':'+process.env.REACT_APP_SECRET_KEY).toString('base64')
 console.log(authToken, "authtoken")
 
-export async function getChannels(username, name, subject) {
-    console.log(username, name, subject)
+export async function getProducts() {
     try {
-        let response = await fetch(URL + '/channels/', {
+        let response = await fetch(URL + '/products/', {
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Basic ${authToken}`
@@ -23,9 +22,9 @@ export async function getChannels(username, name, subject) {
     }
 }
 
-export async function getWarehouses() {
+export async function getInventory() {
     try {
-        let response = await fetch(URL + '/warehouses/',{
+        let response = await fetch(URL + '/inventory/',{
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Basic ${authToken}`
