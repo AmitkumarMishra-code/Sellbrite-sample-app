@@ -1,37 +1,24 @@
-const URL = `https://api.sellbrite.com/v1`
-
-const authToken = Buffer.from(process.env.REACT_APP_ACCOUNT_TOKEN +':'+process.env.REACT_APP_SECRET_KEY).toString('base64')
-console.log(authToken, "authtoken")
+const URL = `https://email-marketing-app.herokuapp.com`
 
 export async function getProducts() {
     try {
-        let response = await fetch(URL + '/products/', {
-            headers: {
-                'content-type': 'application/json',
-                "Authorization": `Basic ${authToken}`
-            },
-            mode : 'no-cors',
-        })
+        let response = await fetch(URL + '/products')
         let data = await response.json()
+        console.log(data)
         if (response.status !== 200) {
             throw new Error(data.message)
         } else {
             return data.message
         }
     } catch (error) {
+        console.log(error.message)
         throw error
     }
 }
 
 export async function getInventory() {
     try {
-        let response = await fetch(URL + '/inventory/',{
-            headers: {
-                'content-type': 'application/json',
-                "Authorization": `Basic ${authToken}`
-            },
-            mode : 'no-cors',
-        })
+        let response = await fetch(URL + '/inventory')
         let data = await response.json()
         if (response.status !== 200) {
             throw new Error(data.message)

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { Link as homeLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import { getProducts } from "../apiCalls/apiCalls";
+import { getInventory } from "../apiCalls/apiCalls";
 
 export default function Inventory() {
     const [data, setData] = useState([])
@@ -19,7 +19,7 @@ export default function Inventory() {
 
     const fetchData = async () => {
         try {
-            let response = await getProducts()
+            let response = await getInventory()
             setIsLoading(false)
             console.log(response)
             setData(response)
@@ -43,15 +43,15 @@ export default function Inventory() {
                 data.length > 0 && !isLoading && !errorMessage ?
                     <Box minW='40%' borderWidth="1px" borderRadius="lg" boxShadow='md' p='2rem'>
                         <Table variant="striped" borderWidth="1px" borderRadius='lg'>
-                            <TableCaption>Detailed View of all Products</TableCaption>
+                            <TableCaption>Detailed View of all Inventory</TableCaption>
                             <Thead>
                                 <Tr>
                                     <Th>Product Name</Th>
-                                    <Th>SKU</Th>
-                                    <Th>On Hand</Th>
-                                    <Th>Available</Th>
-                                    <Th>Cost</Th>
-                                    <Th>Bin Location</Th>
+                                    <Th textAlign = 'center'>SKU</Th>
+                                    <Th textAlign = 'center'>On Hand</Th>
+                                    <Th textAlign = 'center'>Available</Th>
+                                    <Th textAlign = 'center'>Cost</Th>
+                                    <Th textAlign = 'center'>Bin Location</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
@@ -59,11 +59,11 @@ export default function Inventory() {
                                     data.length > 0 && data.map((product, idx) =>
                                         <Tr key={idx}>
                                             <Td>{product.product_name}</Td>
-                                            <Td> {product.sku}</Td>
-                                            <Td>{product.on_hand}</Td>
-                                            <Td>{product.available}</Td>
-                                            <Td> {product.cost}</Td>
-                                            <Td> {product.bin_location}</Td>
+                                            <Td textAlign = 'center'> {product.sku}</Td>
+                                            <Td textAlign = 'center'>{product.on_hand}</Td>
+                                            <Td textAlign = 'center'>{product.available}</Td>
+                                            <Td textAlign = 'center'> {product.cost}</Td>
+                                            <Td textAlign = 'center'> {product.bin_location}</Td>
                                         </Tr>
                                     )
                                 }

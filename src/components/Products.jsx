@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react"
 import { Link as homeLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import { getInventory } from "../apiCalls/apiCalls";
+import {  getProducts } from "../apiCalls/apiCalls";
 
 export default function Products() {
     const [data, setData] = useState([])
@@ -19,12 +19,13 @@ export default function Products() {
 
     const fetchData = async () => {
         try {
-            let response = await getInventory()
+            let response = await getProducts()
             setIsLoading(false)
             console.log(response)
             setData(response)
         }
         catch (error) {
+            console.log(error)
             setErrorMessage(error.message)
             setIsLoading(false)
         }
@@ -48,24 +49,24 @@ export default function Products() {
                                 <Tr>
                                     <Th>Image</Th>
                                     <Th>Product Name</Th>
-                                    <Th>SKU</Th>
-                                    <Th>Brand</Th>
-                                    <Th>Manufacturer</Th>
-                                    <Th>Price</Th>
-                                    <Th>Category</Th>
+                                    <Th textAlign = 'center'>SKU</Th>
+                                    <Th textAlign = 'center'>Brand</Th>
+                                    <Th textAlign = 'center'>Manufacturer</Th>
+                                    <Th textAlign = 'center'>Price</Th>
+                                    <Th textAlign = 'center'>Category</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {
                                     data.length > 0 && data.map((product, idx) =>
                                         <Tr key={idx}>
-                                            <Td><Image src={product.image_list}/></Td>
+                                            <Td><Image src={product.image_list} width = '60px' height ='60px' objectFit = 'cover' /></Td>
                                             <Td>{product.name}</Td>
-                                            <Td> {product.sku}</Td>
-                                            <Td>{product.brand}</Td>
-                                            <Td>{product.manufacturer}</Td>
-                                            <Td> {product.price}</Td>
-                                            <Td> {product.category_name}</Td>
+                                            <Td textAlign = 'center'> {product.sku}</Td>
+                                            <Td textAlign = 'center'>{product.brand}</Td>
+                                            <Td textAlign = 'center'>{product.manufacturer}</Td>
+                                            <Td textAlign = 'center'> {product.price}</Td>
+                                            <Td textAlign = 'center'> {product.category_name}</Td>
                                         </Tr>
                                     )
                                 }
