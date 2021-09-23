@@ -9,7 +9,8 @@ export async function getProducts() {
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Basic ${authToken}`
-            }
+            },
+            mode : 'no-cors',
         })
         let data = await response.json()
         if (response.status !== 200) {
@@ -28,7 +29,8 @@ export async function getInventory() {
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Basic ${authToken}`
-            }
+            },
+            mode : 'no-cors',
         })
         let data = await response.json()
         if (response.status !== 200) {
